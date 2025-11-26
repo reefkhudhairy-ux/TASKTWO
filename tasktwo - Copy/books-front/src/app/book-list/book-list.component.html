@@ -1,0 +1,51 @@
+<div dir="rtl" class="container">
+  <h2>عرض الكتب والبحث</h2>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      placeholder="ابحث باسم الكتاب "
+      class="search-input"
+    />
+    <button
+      (click)="performSearch(searchControl.value || '')"
+      class="search-button"
+    >
+      بحث
+    </button>
+    <button class="search-button" routerLink="/book-add">
+      إضافة كتاب جديد
+    </button>
+  </div>
+
+  <hr class="separator" />
+
+  <div *ngIf="books.length > 0" class="book-list-grid">
+    <div *ngFor="let book of books" class="book-card">
+      <div class="book-image-area">
+        <img
+          [src]="'http://localhost:3000' + book.imageUrl"
+          (error)="onImgError($event)"
+          alt="صورة الكتاب"
+          class="book-cover"
+        />
+        <!-- *ngIf="book.imageUrl" 
+            [src]="
+            book.imageUrl
+              ? 'http://localhost:3000' + book.imageUrl
+              : 'https://media.istockphoto.com/id/912149792/vector/simple-open-book-vector-icon-single-color-design-element-isolated-on-white-learning-literacy.jpg?s=612x612&w=0&k=20&c=og9X3qhJx8gLvH1qI5RIJX1GSUArNkEhZ6Tuv_VFqh8='
+          "-->
+      </div>
+
+      <div class="book-details">
+        <h4 class="book-title">{{ book.name }}</h4>
+        <p class="book-description">{{ book.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="books.length === 0" class="msg-no-results">
+    لا توجد نتائج للبحث.
+  </div>
+</div>

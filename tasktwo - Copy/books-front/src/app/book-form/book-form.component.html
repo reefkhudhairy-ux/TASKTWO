@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="profile-placeholder">
+    <div class="cross-line"></div>
+  </div>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="img-area">
+      <label for="bookimg">صورة الكتاب</label>
+      <input id="bookimg" type="file" (change)="onFileSelect($event)" required />
+    </div>
+
+    <div class="form-group">
+      <label>اسم</label>
+      <input type="text" formControlName="name" placeholder="أدخل الاسم" />
+      <small
+        *ngIf="bookForm.get('name')?.invalid && bookForm.get('name')?.touched"
+        class="error-text"
+      >
+        البيانات ناقصة: الاسم مطلوب
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>النوع</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" value="عام" formControlName="type" /> عام
+        </label>
+        <label>
+          <input type="radio" value="مخصص" formControlName="type" /> مخصص
+        </label>
+      </div>
+      <small
+        *ngIf="bookForm.get('type')?.invalid && bookForm.get('type')?.touched"
+        class="error-text"
+      >
+        البيانات ناقصة: النوع مطلوب
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>تصنيف</label>
+      <select title="تصنيف" formControlName="category">
+        <option value="" disabled selected>اختر</option>
+        <option value="ترفيهي">ترفيهي</option>
+        <option value="ثقافي">ثقافي</option>
+        <option value="ديني">ديني</option>
+        <option value="تقني">تقني</option>
+        <option value="صحي">صحي</option>
+        <option value="رياضي">رياضي</option>
+      </select>
+      <small
+        *ngIf="
+          bookForm.get('category')?.invalid && bookForm.get('category')?.touched
+        "
+        class="error-text"
+      >
+        البيانات ناقصة: اختر تصنيف
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>وصف</label>
+      <textarea
+        title="desc"
+        formControlName="description"
+        rows="3"
+        placeholder="اكتب وصف للكتاب"
+      ></textarea>
+      <small
+        *ngIf="
+          bookForm.get('description')?.invalid &&
+          bookForm.get('description')?.touched
+        "
+        class="error-text"
+      >
+        البيانات ناقصة: الوصف مطلوب
+      </small>
+    </div>
+
+    <button type="submit" class="save-btn">حفظ</button>
+  </form>
+  <button [routerLink]="['/book-list']" class="save-btn">قائمة الكتب</button>
+
+  <div *ngIf="successMessage" class="success-msg">
+    {{ successMessage }}
+  </div>
+</div>
+
