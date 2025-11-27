@@ -1,3 +1,5 @@
+<div dir="rtl" class="container">
+<h2>{{ isEditMode ? 'تعديل بيانات الكتب' : 'اضافة كتاب'}}</h2>
 <div class="container">
   <div class="profile-placeholder">
     <div class="cross-line"></div>
@@ -78,7 +80,9 @@
       </small>
     </div>
 
-    <button type="submit" class="save-btn">حفظ</button>
+    <!-- <button type="submit" class="save-btn" >حفظ</button> -->
+    <button type="submit" class="save-btn" [disabled]="bookForm.invalid">{{isEditMode? "حفظ التعديلات" : "حفظ"}}</button>
+
   </form>
   <button [routerLink]="['/book-list']" class="save-btn">قائمة الكتب</button>
 
@@ -86,4 +90,4 @@
     {{ successMessage }}
   </div>
 </div>
-
+</div>

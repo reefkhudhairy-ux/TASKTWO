@@ -20,11 +20,19 @@ export const routes: Routes = [
     component: BookFormComponent,
     title: 'إضافة كتاب جديد',
   },
-
+  {
+    path: 'books/edit/:id',
+    component: BookFormComponent,
+    title: ' تحديث ',
+  },
   {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',
     title: 'قائمة وعرض الكتب',
+  },
+  {
+    path: 'books/:id/edit',
+    component: BookFormComponent,
   },
 ];

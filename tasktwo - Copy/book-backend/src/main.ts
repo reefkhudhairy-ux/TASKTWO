@@ -7,26 +7,15 @@ import { join } from 'path';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
+  // app.enableCors({
+  //   origin: '*',
+  //   methods: 'GET , HEAS, PUT, PATCH, POST, DELETE',
+  //   allowedHeaders: 'Content-Type , Accept',
+  // });
 
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
-
-  // app.use('*', (req, res, next) => {
-  //   if (req.originalUrl.startWith('/api')) {
-  //     return next();
-  //   }
-  //   res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
-  // });
-
-// app.use('api', (req,res,next)=>{
-//   next();
-// });
-
-// app.get('*' , (req: Request, res: Response) => {
-//     res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
-//   });
-
   await app.listen(3000);
 }
 bootstrap();

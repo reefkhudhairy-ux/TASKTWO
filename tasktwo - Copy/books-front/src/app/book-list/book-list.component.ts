@@ -4,7 +4,8 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-
+import { BookService } from '../book.service';
+import { deleteRes } from '../book.service';
 @Component({
   standalone: true,
   selector: 'app-book-list',
@@ -15,8 +16,9 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class BookListComponent implements OnInit {
   searchControl = new FormControl('');
   books: any[] = [];
+  router: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private bookService: BookService) {}
 
   ngOnInit(): void {
     this.searchControl.valueChanges
@@ -47,5 +49,23 @@ export class BookListComponent implements OnInit {
         console.error('Error fetching books:', err);
       },
     });
+  }
+
+  onDelete(bookId: string) {
+    this.bookService.deleteBook(bookId).subscribe({
+      next: () => {
+        console.log('book deleted');
+        // this.bookService.getBooks();
+        this.books = this.books.filter((b) => b._id !== bookId);
+      },
+      error: (err: any) => {
+        console.error('error deleting book', err);
+        alert('حدث خطا');
+      },
+    });
+  }
+
+  editBook(id: string){
+    this.router.navigate(['/books', id, 'edit']);
   }
 }
