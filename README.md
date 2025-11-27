@@ -28,14 +28,6 @@
 
 ---
 
-## بنية المشروع
-
-```
-tasktwo/
- ├── frontend/
- ├── backend/
- ├── docker-compose.yml
- └── README.md
 ```
 
 ---
