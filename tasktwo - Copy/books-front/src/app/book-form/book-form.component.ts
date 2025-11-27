@@ -30,7 +30,7 @@ export class BookFormComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private BookService: BookService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.bookForm = this.fb.group({
       name: ['', Validators.required],
@@ -81,7 +81,7 @@ export class BookFormComponent implements OnInit {
 
       if (this.isEditMode && this.bookId) {
         this.BookService.updateBook(this.bookId, formData).subscribe({
-          next: (res : any) => {
+          next: (res: any) => {
             this.successMessage = 'تم التعديل بنجاح';
           },
           error: (err: HttpErrorResponse) => {

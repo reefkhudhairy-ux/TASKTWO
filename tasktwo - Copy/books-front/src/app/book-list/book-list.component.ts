@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,11 @@ export class BookListComponent implements OnInit {
   books: any[] = [];
   router: any;
 
-  constructor(private http: HttpClient, private bookService: BookService) {}
+  constructor(
+    private http: HttpClient,
+    private bookService: BookService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.searchControl.valueChanges
@@ -52,20 +56,23 @@ export class BookListComponent implements OnInit {
   }
 
   onDelete(bookId: string) {
-    this.bookService.deleteBook(bookId).subscribe({
-      next: () => {
-        console.log('book deleted');
-        // this.bookService.getBooks();
-        this.books = this.books.filter((b) => b._id !== bookId);
-      },
-      error: (err: any) => {
-        console.error('error deleting book', err);
-        alert('حدث خطا');
-      },
-    });
+    const Confirm = confirm('هل انت متأكد؟');
+    if (Confirm) {
+      this.bookService.deleteBook(bookId).subscribe({
+        next: () => {
+          console.log('book deleted');
+          // this.bookService.getBooks();
+          this.books = this.books.filter((b) => b._id !== bookId);
+        },
+        error: (err: any) => {
+          console.error('error deleting book', err);
+          alert('حدث خطا');
+        },
+      });
+    }
   }
 
-  editBook(id: string){
+  editBook(id: string) {
     this.router.navigate(['/books', id, 'edit']);
   }
 }

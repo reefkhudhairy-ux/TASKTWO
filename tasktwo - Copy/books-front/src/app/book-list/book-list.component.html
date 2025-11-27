@@ -23,13 +23,6 @@
 
   <div *ngIf="books.length > 0" class="book-list-grid">
     <div *ngFor="let book of books" class="book-card">
-      <div class="buttons">
-        <button (click)="onDelete(book._id)" class="deleteButton">حذف</button>
-        <!-- <button (click)="editBook(book._id)" class="editButton">تعديل</button> -->
-        <button [routerLink]="['/books/edit', book._id]" class="editButton">
-          تعديل
-        </button>
-      </div>
       <div class="book-image-area">
         <img
           [src]="'http://localhost:3000' + book.imageUrl"
@@ -48,6 +41,13 @@
       <div class="book-details">
         <h4 class="book-title">{{ book.name }}</h4>
         <p class="book-description">{{ book.description }}</p>
+      </div>
+       <div class="buttons">
+        <button (click)="onDelete(book._id)" class="deleteButton">حذف</button>
+        <!-- <button (click)="editBook(book._id)" class="editButton">تعديل</button> -->
+        <button [routerLink]="['/books/edit', book._id]" class="editButton">
+          تعديل
+        </button>
       </div>
     </div>
   </div>

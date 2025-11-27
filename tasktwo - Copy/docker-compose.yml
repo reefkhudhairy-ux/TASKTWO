@@ -11,6 +11,8 @@ services:
   backend:
     build: ./book-backend
     command: npm run start:dev
+    volumes:
+    - ./uploads:/app/uploads
     ports:
     - "3000:3000"
     depends_on:
