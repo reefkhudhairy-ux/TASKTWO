@@ -20,10 +20,10 @@
 
 | Method | Endpoint     | Description            |
 | ------ | ------------ | ---------------------- |
-| GET    | `/books`     | لعرض جميع الكتب والبحث |
+| GET    | `/books/search?q=`     | لعرض جميع الكتب والبحث |
 | POST   | `/books`     | لانشاء كتاب            |
 | GET    | `/books/:id` | لاسترجاع كتاب واحد     |
-| PUT    | `/books/:id` | لتحديث كتاب            |
+| PATCH    | `/books/:id` | لتحديث كتاب            |
 | DELETE | `/books/:id` | لحذف كتاب              |
 
 ---
